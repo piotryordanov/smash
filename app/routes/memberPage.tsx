@@ -16,7 +16,7 @@ const styles = {
 
 
 export const MemberPage = ({brand, logoUrl}) => {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
   const {supabase} = useOutletContext()
   // supabase.auth.signUp({email: 'otr@piotryordanov.com', password: '123456'})
   // supabase.auth.signInWithPassword({email: 'piotr@piotryordanov.com', password: '123456'})
