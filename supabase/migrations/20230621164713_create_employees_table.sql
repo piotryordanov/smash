@@ -1,6 +1,5 @@
-create table
-notes (
-id bigint primary key generated always as identity,
-content text,
-user_id uuid
+CREATE TABLE notes (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  content TEXT,
+  user_id UUID
 );
