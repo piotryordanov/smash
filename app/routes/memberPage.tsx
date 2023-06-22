@@ -1,6 +1,9 @@
 import {useState} from 'react'
 import {LoginForm} from '../components/LoginForm'
 import {RegisterForm} from '../components/RegisterForm'
+import {useLoaderData, useOutletContext} from '@remix-run/react'
+import {createClient} from '@supabase/supabase-js'
+
 const styles = {
   label: 'block text-gray-700 text-sm font-bold pt-2 pb-1',
   field:
@@ -9,8 +12,17 @@ const styles = {
     ' bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600',
   errorMsg: 'text-red-500 text-sm',
 }
+
+
+
 export const MemberPage = ({brand, logoUrl}) => {
-  const [isLogin, setIsLogin] = useState('Login')
+  const [isLogin, setIsLogin] = useState(false)
+  const {supabase} = useOutletContext()
+  // supabase.auth.signUp({email: 'otr@piotryordanov.com', password: '123456'})
+  // supabase.auth.signInWithPassword({email: 'piotr@piotryordanov.com', password: '123456'})
+
+
+
   return (
     <div className='flex flex-row w-full'>
       <div className='py-12 flex-1'>
@@ -37,9 +49,9 @@ export const MemberPage = ({brand, logoUrl}) => {
               <span className='border-b w-1/5 border-red-700 lg:w-1/4'></span>
             </div>
             {isLogin ? (
-              <LoginForm styles={styles} />
+              <LoginForm supabase={supabase} styles={styles} />
             ) : (
-              <RegisterForm styles={styles} />
+              <RegisterForm supabase={supabase} styles={styles} />
             )}
           </div>
         </div>

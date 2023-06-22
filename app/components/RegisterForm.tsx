@@ -1,7 +1,7 @@
 import {Formik, Field, Form, ErrorMessage} from 'formik'
 import {registerSchema} from './validationSchema'
 
-export const RegisterForm = ({styles}) => (
+export const RegisterForm = ({styles, supabase}) => (
   <>
     <Formik
       initialValues={{
@@ -11,14 +11,13 @@ export const RegisterForm = ({styles}) => (
       }}
       validationSchema={registerSchema}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2))
+        supabase.auth.signUp({
+          email: values.email,
+          password: values.password,
+        })
       }}
     >
       <Form>
-        <label className={styles.label} htmlFor='name'> Full Name </label>
-        <Field className={styles.field} id='username' name='username' />
-        <ErrorMessage component='a' className={styles.errorMsg} name='username' />
-
         <label className={styles.label} htmlFor='Email'>
           Email
         </label>

@@ -2,7 +2,7 @@ import {Formik, Field, Form, ErrorMessage} from 'formik'
 import {loginSchema} from './validationSchema'
 import * as Yup from 'yup'
 
-export const LoginForm = ({styles}) => (
+export const LoginForm = ({styles, supabase}) => (
   <>
     <Formik
       initialValues={{
@@ -11,7 +11,10 @@ export const LoginForm = ({styles}) => (
       }}
       validationSchema={loginSchema}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2))
+        supabase.auth.signInWithPassword({
+          email: values.email,
+          password: values.password,
+        })
       }}
     >
       <Form>
